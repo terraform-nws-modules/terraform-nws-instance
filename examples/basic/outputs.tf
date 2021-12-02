@@ -1,10 +1,10 @@
 
 output "name" {
   description = "Instance names"
-  value       = instance.name[*]
+  value       = module.instance.name[*]
 }
 
 output "id" {
   description = "Instance IDs"
-  value       = instance.id[*]
+  value       = module.instance.id[*]
 }

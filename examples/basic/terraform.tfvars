@@ -1,5 +1,5 @@
 name           = ["VM0"]
-ip             = ["10.0.2.16"]
+ip             = ["10.0.1.10"]
 instance_type  = ["t2.micro"]
 root_dist_size = [10]
 template       = ["Ubuntu 20.04 LTS"]
