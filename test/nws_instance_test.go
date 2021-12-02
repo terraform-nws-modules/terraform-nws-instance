@@ -18,12 +18,12 @@ func TestNwsInstanceExample(t *testing.T) {
 
 	stage(t, "deploy", func() {
 		opts := config(t, exp_name, servicePath)
-		test_structure.SaveTerraformOptions(t, "/tmp", opts)
+		test_structure.SaveTerraformOptions(t, servicePath, opts)
 		terraform.InitAndApply(t, opts)
 	})
 
 	defer stage(t, "destroy", func() {
-		opts := test_structure.LoadTerraformOptions(t, "/tmp")
+		opts := test_structure.LoadTerraformOptions(t, servicePath)
 		terraform.Destroy(t, opts)
 	})
 
