@@ -4,9 +4,10 @@ import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/stretchr/testify/assert"
 )
 
-func config(t *testing.T, servicePath string, name []string) *terraform.Options {
+func config(t *testing.T, name []string, servicePath string) *terraform.Options {
 	return terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: servicePath,
 		// Variables to pass to our Terraform code using -var options
@@ -19,4 +20,12 @@ func config(t *testing.T, servicePath string, name []string) *terraform.Options 
 			"network_id":     "b94ccf24-2346-4a9d-9a23-12c46a642e74",
 		},
 	})
+}
+
+func validate(t *testing.T, opts *terraform.Options, name []string) {
+	act_name := terraform.Output(t, opts, "name")
+	id := terraform.Output(t, opts, "id")
+
+	assert.Len(t, len(name), len(id))
+	assert.ElementsMatch(t, name, act_name)
 }
