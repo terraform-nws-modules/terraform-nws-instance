@@ -22,6 +22,6 @@ variable "template" {
   type = list(string)
 }
 
-variable "root_dist_size" {
+variable "root_disk_size" {
   type = list(number)
 }
