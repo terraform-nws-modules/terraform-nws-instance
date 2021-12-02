@@ -14,7 +14,7 @@ func TestNwsInstanceExample(t *testing.T) {
 
 	servicePath := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/basic")
 
-	exp_name := []string{"VM0"}
+	exp_name := []string{"VM0", "VM1"}
 
 	stage(t, "deploy", func() {
 		opts := config(t, exp_name, servicePath)
