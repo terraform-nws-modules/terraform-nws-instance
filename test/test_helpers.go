@@ -3,6 +3,7 @@ package test
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
@@ -20,6 +21,8 @@ func config(t *testing.T, name []string, servicePath string) *terraform.Options 
 			"template":       []string{"Ubuntu 20.04 LTS", "Ubuntu 20.04 LTS"},
 			"network_id":     "b94ccf24-2346-4a9d-9a23-12c46a642e74",
 		},
+		MaxRetries:         3,
+		TimeBetweenRetries: 5 * time.Second,
 	})
 }
 
