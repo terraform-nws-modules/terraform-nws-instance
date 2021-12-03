@@ -25,11 +25,11 @@ func config(t *testing.T, cfg TestCaseT, servicePath string) *terraform.Options 
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
 			"name":           cfg.name,
-			"ip":             []string{"10.0.1.16", "10.0.1.17"},
-			"instance_type":  []string{"t2.micro", "t2.micro"},
-			"root_disk_size": []int{12, 12},
-			"template":       []string{"Ubuntu 20.04 LTS", "Ubuntu 20.04 LTS"},
-			"network_id":     "b94ccf24-2346-4a9d-9a23-12c46a642e74",
+			"ip":             cfg.ip,
+			"instance_type":  cfg.instance_type,
+			"root_disk_size": cfg.disk_size,
+			"template":       cfg.template,
+			"network_id":     cfg.network_id,
 		},
 		MaxRetries:         3,
 		TimeBetweenRetries: 5 * time.Second,
