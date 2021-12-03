@@ -1,7 +1,7 @@
 package test
 
 import (
-	"fmt"
+	"strings"
 	"testing"
 	"time"
 
@@ -27,12 +27,18 @@ func config(t *testing.T, name []string, servicePath string) *terraform.Options 
 }
 
 func validate(t *testing.T, opts *terraform.Options, name []string) {
-	act_name := terraform.Output(t, opts, "name")
-	id := terraform.Output(t, opts, "id")
+	out_name := terraform.Output(t, opts, "name")
+	out_id := terraform.Output(t, opts, "id")
 
-	fmt.Printf(">>>>> Id type: %T, value: %v\n", id, id)
-	fmt.Printf(">>>>> Name type: %T, value: %v\n", act_name, act_name)
+	act_name := strings.Fields(trimBrackets(out_name))
+	act_id := strings.Fields(trimBrackets(out_id))
 
-	assert.Len(t, len(name), len(id))
-	// assert.ElementsMatch(t, name, act_name)
+	assert.Equal(t, len(name), len(act_id))
+	assert.ElementsMatch(t, name, act_name)
+}
+
+func trimBrackets(s string) string {
+	str0 := strings.TrimLeft(s, "[")
+	str1 := strings.TrimRight(str0, "]")
+	return str1
 }
