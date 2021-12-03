@@ -11,7 +11,6 @@ func TestNwsInstanceExample(t *testing.T) {
 	t.Parallel()
 
 	stage := test_structure.RunTestStage
-	servicePath := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/basic")
 
 	const (
 		instType  = "t2.micro"
@@ -45,6 +44,10 @@ func TestNwsInstanceExample(t *testing.T) {
 		// capture range variable so that it doesn't update when the subtest goroutine swaps.
 		testCase := testCase
 
+		// generate a random service path for each parallel test
+		servicePath := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/basic")
+
+		// fork a parallel test with all stages
 		t.Run(testCase.testName, func(t *testing.T) {
 			t.Parallel()
 			stage(t, "deploy", func() {

@@ -34,11 +34,13 @@ func config(t *testing.T, cfg TestCaseT, servicePath string) *terraform.Options 
 			"template":       cfg.template,
 			"network_id":     cfg.network_id,
 		},
+		// Add retries to eliminate trasilent errors
 		MaxRetries:         3,
 		TimeBetweenRetries: 5 * time.Second,
 	})
 }
 
+// validates Terraform output versus expected
 func validate(t *testing.T, opts *terraform.Options, name []string) {
 	out_name := terraform.Output(t, opts, "name")
 	out_id := terraform.Output(t, opts, "id")
@@ -50,6 +52,7 @@ func validate(t *testing.T, opts *terraform.Options, name []string) {
 	assert.ElementsMatch(t, name, act_name)
 }
 
+// Validation helpers
 func trimBrackets(s string) string {
 	str0 := strings.TrimLeft(s, "[")
 	str1 := strings.TrimRight(str0, "]")
