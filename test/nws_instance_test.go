@@ -22,6 +22,7 @@ func TestNwsInstanceExample(t *testing.T) {
 
 	testCases := []TestCaseT{
 		{
+			"Single VM",
 			[]string{genVMName()},
 			[]string{"10.0.1.16"},
 			[]string{instType},
@@ -30,6 +31,7 @@ func TestNwsInstanceExample(t *testing.T) {
 			networkId,
 		},
 		{
+			"Multiple VM",
 			[]string{genVMName(), genVMName()},
 			[]string{"10.0.1.17", "10.0.1.18"},
 			[]string{instType, instType},
@@ -43,20 +45,23 @@ func TestNwsInstanceExample(t *testing.T) {
 		// capture range variable so that it doesn't update when the subtest goroutine swaps.
 		testCase := testCase
 
-		stage(t, "deploy", func() {
-			opts := config(t, testCase, servicePath)
-			test_structure.SaveTerraformOptions(t, servicePath, opts)
-			terraform.InitAndApply(t, opts)
-		})
+		t.Run(testCase.testName, func(t *testing.T) {
+			t.Parallel()
+			stage(t, "deploy", func() {
+				opts := config(t, testCase, servicePath)
+				test_structure.SaveTerraformOptions(t, servicePath, opts)
+				terraform.InitAndApply(t, opts)
+			})
 
-		defer stage(t, "destroy", func() {
-			opts := test_structure.LoadTerraformOptions(t, servicePath)
-			terraform.Destroy(t, opts)
-		})
+			defer stage(t, "destroy", func() {
+				opts := test_structure.LoadTerraformOptions(t, servicePath)
+				terraform.Destroy(t, opts)
+			})
 
-		stage(t, "validate", func() {
-			opts := test_structure.LoadTerraformOptions(t, servicePath)
-			validate(t, opts, testCase.name)
+			stage(t, "validate", func() {
+				opts := test_structure.LoadTerraformOptions(t, servicePath)
+				validate(t, opts, testCase.name)
+			})
 		})
 	}
 }

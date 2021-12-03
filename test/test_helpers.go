@@ -12,6 +12,7 @@ import (
 )
 
 type TestCaseT struct {
+	testName      string
 	name          []string
 	ip            []string
 	instance_type []string
