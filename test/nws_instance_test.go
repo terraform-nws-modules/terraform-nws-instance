@@ -13,15 +13,20 @@ func TestNwsInstanceExample(t *testing.T) {
 	t.Parallel()
 
 	stage := test_structure.RunTestStage
-
 	servicePath := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/basic")
-
-	exp_name := []string{"VM0", "VM1"}
 
 	testCases := []TestCaseT{
 		{
+			[]string{fmt.Sprintf("vm-%s", random.UniqueId())},
+			[]string{"10.0.1.16"},
+			[]string{"t2.micro"},
+			[]int{12},
+			[]string{"Ubuntu 20.04 LTS"},
+			"b94ccf24-2346-4a9d-9a23-12c46a642e74",
+		},
+		{
 			[]string{fmt.Sprintf("vm-%s", random.UniqueId()), fmt.Sprintf("vm-%s", random.UniqueId())},
-			[]string{"10.0.1.16", "10.0.1.17"},
+			[]string{"10.0.1.17", "10.0.1.18"},
 			[]string{"t2.micro", "t2.micro"},
 			[]int{12, 12},
 			[]string{"Ubuntu 20.04 LTS", "Ubuntu 20.04 LTS"},
@@ -46,7 +51,7 @@ func TestNwsInstanceExample(t *testing.T) {
 
 		stage(t, "validate", func() {
 			opts := test_structure.LoadTerraformOptions(t, servicePath)
-			validate(t, opts, exp_name)
+			validate(t, opts, testCase.name)
 		})
 	}
 }
