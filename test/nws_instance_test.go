@@ -16,7 +16,7 @@ func TestNwsInstanceExample(t *testing.T) {
 		instType  = "t2.micro"
 		diskSize  = 12
 		template  = "Ubuntu 20.04 LTS"
-		networkId = "b94ccf24-2346-4a9d-9a23-12c46a642e74"
+		networkId = "d1c5b44d-7ea4-4667-ac48-b561359f72b4"
 	)
 
 	testCases := []TestCaseT{
