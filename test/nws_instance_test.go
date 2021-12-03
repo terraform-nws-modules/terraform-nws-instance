@@ -1,8 +1,10 @@
 package test
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 )
@@ -18,7 +20,7 @@ func TestNwsInstanceExample(t *testing.T) {
 
 	testCases := []TestCaseT{
 		{
-			[]string{"VM0", "VM1"},
+			[]string{fmt.Sprintf("vm-%s", random.UniqueId()), fmt.Sprintf("vm-%s", random.UniqueId())},
 			[]string{"10.0.1.16", "10.0.1.17"},
 			[]string{"t2.micro", "t2.micro"},
 			[]int{12, 12},
