@@ -1,10 +1,8 @@
 package test
 
 import (
-	"fmt"
 	"testing"
 
-	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 )
@@ -15,22 +13,29 @@ func TestNwsInstanceExample(t *testing.T) {
 	stage := test_structure.RunTestStage
 	servicePath := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/basic")
 
+	const (
+		instType  = "t2.micro"
+		diskSize  = 12
+		template  = "Ubuntu 20.04 LTS"
+		networkId = "b94ccf24-2346-4a9d-9a23-12c46a642e74"
+	)
+
 	testCases := []TestCaseT{
 		{
-			[]string{fmt.Sprintf("vm-%s", random.UniqueId())},
+			[]string{genVMName()},
 			[]string{"10.0.1.16"},
-			[]string{"t2.micro"},
-			[]int{12},
-			[]string{"Ubuntu 20.04 LTS"},
-			"b94ccf24-2346-4a9d-9a23-12c46a642e74",
+			[]string{instType},
+			[]int{diskSize},
+			[]string{template},
+			networkId,
 		},
 		{
-			[]string{fmt.Sprintf("vm-%s", random.UniqueId()), fmt.Sprintf("vm-%s", random.UniqueId())},
+			[]string{genVMName(), genVMName()},
 			[]string{"10.0.1.17", "10.0.1.18"},
-			[]string{"t2.micro", "t2.micro"},
-			[]int{12, 12},
-			[]string{"Ubuntu 20.04 LTS", "Ubuntu 20.04 LTS"},
-			"b94ccf24-2346-4a9d-9a23-12c46a642e74",
+			[]string{instType, instType},
+			[]int{diskSize, diskSize},
+			[]string{template, template},
+			networkId,
 		},
 	}
 	for _, testCase := range testCases {

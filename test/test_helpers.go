@@ -1,10 +1,12 @@
 package test
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 	"time"
 
+	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 )
@@ -51,4 +53,8 @@ func trimBrackets(s string) string {
 	str0 := strings.TrimLeft(s, "[")
 	str1 := strings.TrimRight(str0, "]")
 	return str1
+}
+
+func genVMName() string {
+	return fmt.Sprintf("vm-%s", random.UniqueId())
 }
