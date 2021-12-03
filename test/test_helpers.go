@@ -9,12 +9,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func config(t *testing.T, name []string, servicePath string) *terraform.Options {
+type TestCaseT struct {
+	name          []string
+	ip            []string
+	instance_type []string
+	disk_size     []int
+	template      []string
+	network_id    string
+}
+
+func config(t *testing.T, cfg TestCaseT, servicePath string) *terraform.Options {
+
 	return terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: servicePath,
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
-			"name":           name,
+			"name":           cfg.name,
 			"ip":             []string{"10.0.1.16", "10.0.1.17"},
 			"instance_type":  []string{"t2.micro", "t2.micro"},
 			"root_disk_size": []int{12, 12},
