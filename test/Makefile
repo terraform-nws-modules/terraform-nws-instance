@@ -5,9 +5,7 @@ show:
 	@echo 'make lint - run go init'
 	@echo 'make tidy - run go tidy'
 	@echo 'make lint - run linter'
-	@echo 'make priv - run test for private subnets only'
-	@echo 'make pub  - run test for public subnets only'
-	@echo 'make full - run test for all subnets'
+	@echo 'make test - run basic test '
 
 init:
 	@go init $(TEST_NAME)
