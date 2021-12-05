@@ -16,10 +16,10 @@ func TestNwsInstanceExample(t *testing.T) {
 		instType  = "t2.micro"
 		diskSize  = 12
 		template  = "Ubuntu 20.04 LTS"
-		networkId = "d1c5b44d-7ea4-4667-ac48-b561359f72b4"
+		networkID = ""
 	)
 
-	testCases := []TestCaseT{
+	testCases := []testCaseT{
 		{
 			"Single VM",
 			[]string{genVMName()},
@@ -27,7 +27,7 @@ func TestNwsInstanceExample(t *testing.T) {
 			[]string{instType},
 			[]int{diskSize},
 			[]string{template},
-			networkId,
+			networkID,
 		},
 		{
 			"Multiple VM",
@@ -36,7 +36,7 @@ func TestNwsInstanceExample(t *testing.T) {
 			[]string{instType, instType},
 			[]int{diskSize, diskSize},
 			[]string{template, template},
-			networkId,
+			networkID,
 		},
 	}
 	for _, testCase := range testCases {
