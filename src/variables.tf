@@ -16,6 +16,7 @@ variable "zone" {
   type        = string
   default     = "ru-msk-0"
 }
+
 variable "ip" {
   description = "Your VMs IP range"
   type        = list(string)
@@ -26,25 +27,21 @@ variable "name" {
   type        = list(string)
   default     = ["VM0"]
 }
-
 variable "instance_type" {
   description = "Your instance types"
   type        = list(string)
   default     = ["t2.micro"]
 }
-
 variable "template" {
   description = "Your instance templates"
   type        = list(string)
   default     = ["Ubuntu 20.04 LTS"]
 }
-
 variable "root_disk_size" {
   description = "Your system disk size in GB"
   type        = list(number)
   default     = [10]
 }
-
 variable "keypair" {
   description = "Your SSH keypair to access the instance"
   type        = string

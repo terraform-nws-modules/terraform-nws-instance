@@ -12,13 +12,6 @@ func TestNwsInstanceExample(t *testing.T) {
 
 	stage := test_structure.RunTestStage
 
-	const (
-		instType  = "t2.micro"
-		diskSize  = 12
-		template  = "Ubuntu 20.04 LTS"
-		networkID = ""
-	)
-
 	testCases := []testCaseT{
 		{
 			"Single VM",
@@ -27,7 +20,6 @@ func TestNwsInstanceExample(t *testing.T) {
 			[]string{instType},
 			[]int{diskSize},
 			[]string{template},
-			networkID,
 		},
 		{
 			"Multiple VM",
@@ -36,7 +28,6 @@ func TestNwsInstanceExample(t *testing.T) {
 			[]string{instType, instType},
 			[]int{diskSize, diskSize},
 			[]string{template, template},
-			networkID,
 		},
 	}
 	for _, testCase := range testCases {

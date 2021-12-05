@@ -11,16 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type testCaseT struct {
-	testName     string
-	name         []string
-	ip           []string
-	instanceType []string
-	diskSize     []int
-	template     []string
-	networkID    string
-}
-
 func config(t *testing.T, cfg testCaseT, servicePath string) *terraform.Options {
 
 	return terraform.WithDefaultRetryableErrors(t, &terraform.Options{
@@ -32,7 +22,8 @@ func config(t *testing.T, cfg testCaseT, servicePath string) *terraform.Options 
 			"instance_type":  cfg.instanceType,
 			"root_disk_size": cfg.diskSize,
 			"template":       cfg.template,
-			"network_id":     cfg.networkID,
+			"network_id":     networkID,
+			"keypair":        keypair,
 		},
 		// Add retries to eliminate trasilent errors
 		MaxRetries:         3,
