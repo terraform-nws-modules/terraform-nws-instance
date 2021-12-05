@@ -25,3 +25,8 @@ variable "template" {
 variable "root_disk_size" {
   type = list(number)
 }
+
+variable "keypair" {
+  description = "SSH keypair"
+  type        = string
+}

@@ -11,13 +11,16 @@ terraform {
 
 resource "nws_instance" "inst" {
   count            = length(var.name)
-  group            = var.group
+  zone             = var.zone
   name             = var.name[count.index]
   service_offering = var.instance_type[count.index]
-  zone             = var.zone
-  template         = var.template[count.index]
   network_id       = var.network_id
   ip_address       = var.ip[count.index]
+  template         = var.template[count.index]
   root_disk_size   = var.root_disk_size[count.index]
+  group            = var.group
+  keypair          = var.keypair
   expunge          = true
+  start_vm         = true
+  tags             = var.tags
 }

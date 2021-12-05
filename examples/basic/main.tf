@@ -18,4 +18,5 @@ module "instance" {
   instance_type  = var.instance_type
   template       = var.template
   root_disk_size = var.root_disk_size
+  keypair        = var.keypair
 }
