@@ -16,19 +16,19 @@ func TestNwsInstanceExample(t *testing.T) {
 		{
 			"Single VM",
 			[]string{genVMName()},
-			[]string{"10.0.1.16"},
+			[]string{"10.0.1.10"},
 			[]string{instType},
 			[]int{diskSize},
 			[]string{template},
 		},
-		{
-			"Multiple VM",
-			[]string{genVMName(), genVMName()},
-			[]string{"10.0.1.17", "10.0.1.18"},
-			[]string{instType, instType},
-			[]int{diskSize, diskSize},
-			[]string{template, template},
-		},
+		// {
+		// 	"Multiple VM",
+		// 	[]string{genVMName(), genVMName()},
+		// 	[]string{"10.0.1.17", "10.0.1.18"},
+		// 	[]string{instType, instType},
+		// 	[]int{diskSize, diskSize},
+		// 	[]string{template, template},
+		// },
 	}
 	for _, testCase := range testCases {
 

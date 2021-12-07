@@ -4,7 +4,7 @@ const (
 	instType  = "t2.micro"
 	diskSize  = 12
 	template  = "Ubuntu 20.04 LTS"
-	networkID = "aa1bd9e4-c308-46b9-b52e-28b16f6efc32"
+	networkID = "202ff9b2-c751-49c9-90b9-72f7764e1a6d"
 	keypair   = "bku"
 )
 

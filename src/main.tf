@@ -23,4 +23,19 @@ resource "nws_instance" "inst" {
   expunge          = true
   start_vm         = true
   tags             = var.tags
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo hostnamectl set-hostname my-vm",
+      "echo Done!"
+    ]
+    connection {
+      type     = "ssh"
+      port     = 3659
+      user     = "admin"
+      password = "admin"
+      host     = ""
+      timeout  = "45s"
+    }
+  }
 }
